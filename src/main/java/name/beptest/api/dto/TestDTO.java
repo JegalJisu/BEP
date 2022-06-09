@@ -1,5 +1,6 @@
 package name.beptest.api.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,5 +13,10 @@ public class TestDTO {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long seq;
+	private Integer seq;
+	
+	@Column(length = 20, nullable = true)
+	private String text;
+	
+	private Integer num;
 }
