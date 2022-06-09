@@ -1,33 +1,19 @@
 server:
   servlet:
+    port: 8080
     context-path: /
     encoding:
       charset: UTF-8
       enabled: true
       force: true
-
+    
 spring:
-  profiles:
-    active: dev
-
----
-server:
-  servlet:
-    port: 8080
-
-
-spring:
-  config:
-    activate:
-      on-profile: dev
   datasource:
     url: 
     driver: org.mariadb.jdbc.Driver
     username: 
     password: 
   jpa:
-    database: mariadb
-    database-platform: 
     show-sql: true
     generate-ddl: true
     hibernate: 
@@ -35,7 +21,7 @@ spring:
 
 logging:
   file:
-    path: /log
+    path: C:\log
     max-size: 500MB
     max-history: 10
   level:
