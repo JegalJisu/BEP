@@ -29,9 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		/*
 		http.authorizeRequests()
-			.antMatchers("").authenticated()
-			.antMatchers("").authenticated()
+			.antMatchers("/auth/*").authenticated()
 			.antMatchers("/**").permitAll();
 		
 		http.formLogin()
@@ -46,11 +46,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.exceptionHandling()
 			.accessDeniedPage("/denied");
+		 */
+		http.csrf().disable() // csrf 공격을 막기 위해 state 값을 전달 받지 않는다.
+				.httpBasic(); // http 통신으로 basic auth를 사용 할 수 있다. (
 	}
 	
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(/* 서비스 */).passwordEncoder(passwordEncoder());
+//		auth.userDetailsService(/* 서비스 */).passwordEncoder(passwordEncoder());
 	}
 }
 
