@@ -1,16 +1,25 @@
 package name.beptest.api.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 
 @EnableAuthorizationServer
 @Configuration
 public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter{
 	//https://co-de.tistory.com/29
+	
+	@Autowired
+	private TokenStore tokenStore;
+	
+	@Autowired
+	private AuthenticationManager authenticationManager;
 	
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -25,7 +34,7 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 				.authorizedGrantTypes("authorization_code", "password", "refresh_token") // 가능한 토큰 발행 타입
 				.scopes("read", "write") // 가능한 접근 범위
 				.accessTokenValiditySeconds(60 * 60) // 토큰 유효 시간
-				.refreshTokenValiditySeconds(60 * 60) // 토큰 유효 시간
+				.refreshTokenValiditySeconds(6 * 60 * 60) // 토큰 유효 시간
 				.redirectUris("") //가능한 redirect uri
 				.autoApprove(true); // 권한 동의는 자동으로 yes (false로 할시 권한 동의 여부를 묻는다.)
 	}
@@ -33,6 +42,9 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 	// 인증, 토큰 설정
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception{
-		endpoints.userDetailsService(null); // refresh token 발행시 유저 정보 검사 하는데 사용하는 서비스 설정
+//		endpoints.userDetailsService(null); // refresh token 발행시 유저 정보 검사 하는데 사용하는 서비스 설정
+		endpoints.tokenStore(tokenStore)
+					.authenticationManager(authenticationManager)
+					.userDetailsService(null);
 	}
 }
