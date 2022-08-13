@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import name.beptest.api.dto.TestDTO;
 
-public interface TestDao extends JpaRepository<TestDTO, Integer>{
-
+public interface TestDao{
+// public interface TestDao extends JpaRepository<TestDTO, Integer>
 }
