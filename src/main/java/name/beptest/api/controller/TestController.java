@@ -17,6 +17,7 @@ public class TestController {
 	@Autowired
 	private TestDao testDao;
 	
+	/*
 	@GetMapping(value = "/test")
 	@ResponseBody
 	public List<TestDTO> test() {
@@ -27,4 +28,5 @@ public class TestController {
 		
 		return testDao.findAll();
 	}
+	*/
 }
