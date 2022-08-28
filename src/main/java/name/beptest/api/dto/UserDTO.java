@@ -17,8 +17,6 @@ public class UserDTO {
 	@Column
 	private String name;
 	@Column
-	private String nickname;
-	@Column
 	private String email;
 	@Column(name = "REG_DATE")
 	private String regDate;
