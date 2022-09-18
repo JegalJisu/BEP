@@ -18,6 +18,8 @@ public class UserDTO {
 	private String name;
 	@Column
 	private String email;
+	@Column(name = "USER_ROLE")
+	private String userRole;
 	@Column(name = "REG_DATE")
 	private String regDate;
 	@Column(name = "CHG_DATE")
